@@ -1,4 +1,5 @@
-#!/apollo/env/SDETools/bin/ruby
+#!/usr/local/bin/ruby
+
 require "shellwords"
 
 LOCATIONS = [
