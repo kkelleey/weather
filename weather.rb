@@ -2,7 +2,7 @@
 
 require "shellwords"
 
-LOCATIONS = [
+DEFAULT_LOCATIONS = [
   'North Cascades National Park',
   'Olympic National Park',
   'Mount Rainier National Park'
@@ -15,11 +15,20 @@ DAYS_AND_INDEXES = {
 
 URL = "http://wttr.in/"
 
+def remo?
+  `whoami` == "remo"
+end
+
+def locations
+  return ['Snoqualmie National Forest'] if remo?
+  DEFAULT_LOCATIONS
+end
+
 current_most_sunny = 0
 current_best_location = ""
 current_best_day_index = nil
 
-LOCATIONS.each do |location|
+locations.each do |location|
   puts location
   DAYS_AND_INDEXES.each do |day, (day_one, day_two)|
     url1 = "#{URL}~#{location.gsub(" ", "+")}?#{day_one}"
