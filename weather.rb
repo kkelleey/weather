@@ -18,24 +18,25 @@ class WeatherGirl
   end
 
   def tell_me_where_to_go!
-    print_weather_and_get_max_sunny_instances
+    locations.each do |location|
+      [1,2].each do |day_index|
+        print_weather_and_check_max_sunny_instances(location, day_index)
+      end
+    end
+
     print_results
   end
 
-  def print_weather_and_get_max_sunny_instances
-    locations.each do |location|
-      [1,2].each do |day_index|
-        print_separator
-        puts "#{location}: #{day_index_to_day_of_week(day_index)}"
-        weather = WttrClient.new.weather_for(location, day_index)
-        puts weather
-        number_of_sunny_or_clear_instances = weather.scan(/Sunny|Clear/).count
+  def print_weather_and_check_max_sunny_instances(location, day_index)
+    print_separator
+    puts "#{location}: #{day_index_to_day_of_week(day_index)}"
+    weather = WttrClient.new.weather_for(location, day_index)
+    puts weather
+    number_of_sunny_or_clear_instances = weather.scan(/Sunny|Clear/).count
 
-        puts "Number of sunny or clear instances: #{number_of_sunny_or_clear_instances}"
-        if new_maximum?(number_of_sunny_or_clear_instances)
-          add_to_best_locations_and_update_max(number_of_sunny_or_clear_instances, location, day_index)
-        end
-      end
+    puts "Number of sunny or clear instances: #{number_of_sunny_or_clear_instances}"
+    if new_maximum?(number_of_sunny_or_clear_instances)
+      add_to_best_locations_and_update_max(number_of_sunny_or_clear_instances, location, day_index)
     end
   end
 
