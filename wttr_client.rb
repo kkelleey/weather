@@ -18,7 +18,7 @@ class WttrClient
 
   def escaped_curl_and_diff_command(url1, url2)
     Shellwords.escape(
-      "diff <(curl -s '#{url1} 2>/dev/null') <(curl -s '#{url2}' 2>/dev/null)"
+      "diff <(curl -s '#{url1}' 2>/dev/null) <(curl -s '#{url2}' 2>/dev/null)"
     )
   end
 end
