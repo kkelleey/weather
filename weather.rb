@@ -10,7 +10,9 @@ class WeatherGirl
     'Mount Rainier National Park'
   ].freeze
 
-  DAYS_OF_WEEK = %w(Sunday Monday Tuesday Wednesday Thursday Friday).freeze
+  DAYS_OF_WEEK = %w(
+    Sunday Monday Tuesday Wednesday Thursday Friday Saturday
+  ).freeze
 
   def initialize
     @current_max_sunny_instances = 0
