@@ -3,6 +3,17 @@ require "shellwords"
 class WttrClient
   WTTR_BASE_URL = "http://wttr.in/"
 
+  CANADIANS = [
+    'jlins',
+    'lucalvin',
+    'markkwok',
+    'poguel'
+  ].freeze
+
+  def canadian?
+    CANADIANS.include? `whoami`.strip
+  end
+
   def weather_for(location, number_of_days_from_today)
     url1 = wttr_url_for(location, number_of_days_from_today)
     url2 = wttr_url_for(location, number_of_days_from_today + 1)
@@ -13,7 +24,9 @@ class WttrClient
   private
 
   def wttr_url_for(location, number_of_days_from_today)
-    "#{WTTR_BASE_URL}~#{location.gsub(" ", "+")}?#{number_of_days_from_today}"
+    url = "#{WTTR_BASE_URL}~#{location.gsub(" ", "+")}?#{number_of_days_from_today}"
+    url += "m" if canadian?
+    url
   end
 
   def escaped_curl_and_diff_command(url1, url2)

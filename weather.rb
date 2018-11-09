@@ -10,6 +10,7 @@ class WeatherGirl
     'Mount Rainier National Park'
   ].freeze
 
+
   DAYS_OF_WEEK = %w(
     Sunday Monday Tuesday Wednesday Thursday Friday Saturday
   ).freeze
@@ -83,5 +84,6 @@ class WeatherGirl
     puts "-" * 30
   end
 end
+
 
 WeatherGirl.new.tell_me_where_to_go!
